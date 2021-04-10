@@ -1,12 +1,32 @@
 [
   {
+    "environment": "development",
     "name": "default",
     "type": "postgres",
     "host": "localhost",
     "port": "5432",
-    "username": "test",
-    "password": "test",
-    "database": "testdb",
+    "username": "stone",
+    "password": "stone",
+    "database": "stonedb",
+    "entities": [
+      "./src/modules/**/infra/typeorm/entities/*.ts"
+    ],
+    "migrations": [
+      "./src/shared/infra/typeorm/migrations/*.ts"
+    ],
+    "cli": {
+      "migrationsDir": "./src/shared/infra/typeorm/migrations"
+    }
+  },
+  {
+    "environment": "production",
+    "name": "default",
+    "type": "postgres",
+    "host": "localhost",
+    "port": "5432",
+    "username": "stone",
+    "password": "stone",
+    "database": "stonedb",
     "entities": [
       "./dist/modules/**/infra/typeorm/entities/*.js"
     ],

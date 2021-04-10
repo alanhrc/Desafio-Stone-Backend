@@ -1,8 +1,7 @@
-import AppError from '@shared/errors/AppError';
-
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
-import FakeStorageAvatar from '@shared/container/providers/StorageProvider/fakes/FakeStorageAvatar';
 import DeleteUserService from '@modules/users/services/DeleteUserService';
+import FakeStorageAvatar from '@shared/container/providers/StorageProvider/fakes/FakeStorageAvatar';
+import AppError from '@shared/errors/AppError';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeStorageAvatar: FakeStorageAvatar;
@@ -39,5 +38,21 @@ describe('DeleteUser', () => {
         id: 'inexistent-id',
       }),
     ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should be able to delete a avatar user if exists', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Alan Henrique',
+      email: 'alan@alan.com',
+      password: '123456',
+    });
+
+    user.avatar = 'avatar.img';
+
+    await expect(
+      deleteUserService.execute({
+        id: user.id,
+      }),
+    ).resolves;
   });
 });

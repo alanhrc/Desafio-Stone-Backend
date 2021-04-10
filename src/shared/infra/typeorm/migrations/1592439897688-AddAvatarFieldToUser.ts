@@ -1,5 +1,4 @@
 import { MigrationInterface, QueryRunner, TableColumn } from 'typeorm';
-import { tr } from 'date-fns/locale';
 
 export default class AddAvatarFieldToUser1592439897688
   implements MigrationInterface {
