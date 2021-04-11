@@ -1,14 +1,12 @@
+import uploadConfig from '@config/upload';
+import { Exclude, Expose } from 'class-transformer';
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from 'typeorm';
-
-import uploadConfig from '@config/upload';
-
-import { Exclude, Expose } from 'class-transformer';
 
 @Entity('users')
 class User {
@@ -43,7 +41,10 @@ class User {
 
     switch (uploadConfig.driver) {
       case 'disk':
-        return `${process.env.APP_API_URL}/files/${this.avatar}`;
+        if (process.env.NODE_ENV === 'development') {
+          return `${process.env.APP_API_URL}/files/${this.avatar}`;
+        }
+        return `${process.env.APP_WEB_URL}/files/${this.avatar}`;
 
       case 's3':
         return `https://${process.env.AWS_BUCKET}.s3.amazonaws.com/${this.avatar}`;
