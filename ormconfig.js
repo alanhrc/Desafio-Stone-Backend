@@ -1,6 +1,6 @@
 module.exports = [
   {
-    "environment": "development",
+    "environment": "production",
     "name": "default",
     "type": "postgres",
     "host": process.env.DB_HOST,
@@ -19,7 +19,7 @@ module.exports = [
     }
   },
   {
-    "environment": "production",
+    "environment": "development",
     "name": "default",
     "type": "postgres",
     "host": "localhost",
